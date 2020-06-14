@@ -280,3 +280,9 @@ def clean_text(text):
     text = ' '.join(words)
     
     return text
+
+def mask_pos_finder(text):
+    pos = TextBlob(text)
+    for tag in pos.tags:
+        if 'mask' in tag[0]:
+            return tag[1]
