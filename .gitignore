@@ -1,3 +1,5 @@
+.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -134,3 +136,5 @@ dmypy.json
 
 # Datasets
 /Datasets/*
+/5K_Datasets/*
+/10k_Datasets/*
