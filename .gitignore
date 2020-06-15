@@ -134,3 +134,4 @@ dmypy.json
 
 # Datasets
 /Datasets/*
+/10k_Datasets/*
