@@ -1,3 +1,20 @@
+import numpy as np
+import pandas as pd
+import twint
+
+# Fixes runtime errors with twint
+import nest_asyncio
+nest_asyncio.apply()
+
+import nltk
+from nltk import RegexpTokenizer
+from nltk.stem import WordNetLemmatizer 
+from nltk.corpus import stopwords
+from textblob import TextBlob
+import re
+import string
+import emoji
+
 # twitter scrape
 def twint_search(search, username=None, since=None, until=None, drop_cols=None, limit=None):
     '''
@@ -321,9 +338,10 @@ def clean_text(text, stop_words):
     words_edit = [contractions[word] if word in contractions else word for word in words]
     text = ' '.join(words_edit)
 
-    # remove stop words
+    # remove stop words and lemmatize
+    lemmatizer = WordNetLemmatizer()
     words = tokenizer.tokenize(text)
-    words = [word for word in words if word not in stop_words]
+    words = [lemmatizer.lemmatize(word) for word in words if word not in stop_words]
     text = ' '.join(words)
     
     return text
