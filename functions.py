@@ -1,3 +1,51 @@
+# twitter scrape
+def twint_search(search, username=None, since=None, until=None, drop_cols=None, limit=None):
+    '''
+    Function to return a pandas dataframe of tweets in English containing search terms using twint.
+    Required parameter: search term.
+    Optional parameters: username, start date (since) and end date (until) to search, columns to drop, maximum number of tweets (limit).
+    '''
+    c = twint.Config()
+    c.Lang = 'en'
+    c.Search = search
+    c.Username = username
+    c.Since = since
+    c.Until = until
+    c.Limit = limit
+    c.Pandas = True
+    # Hide the printing of every tweet during scrape
+    c.Hide_output = True
+    twint.run.Search(c)
+    df = twint.storage.panda.Tweets_df
+    # Transform date string into datetime object
+    df['date'] = pd.to_datetime(df['date']).dt.date
+    return df
+
+# looping twitter scrape and creating dataframe
+def search_loop(start_date, end_date, search, filename, username=None, drop_cols=None, limit=None):
+    '''
+    Function to loop over date range and perform twint_search function for each day, returning one combined dataframe.
+    Periodically saves progress to CSV after each daily search.
+    Required parameters: start date, end date, search term.
+    Optional parameters: username, columns to drop, maximum number of tweets per day (limit).
+    '''
+    df = pd.DataFrame()
+    date_range = pd.Series(pd.date_range(start_date, end_date))
+    for d in range(len(date_range) - 1):
+        since = date_range[d].strftime('%Y-%m-%d')
+        until = date_range[d + 1].strftime('%Y-%m-%d')
+        day_df = twint_search(search=search, username=username, since=since, until=until, drop_cols=drop_cols, limit=limit)
+        # Drop empty columns
+        day_df.drop(columns=drop_cols, axis=1, inplace=True)
+        # Add new daily data to dataframe, reset index, save to CSV
+        df = pd.concat([df, day_df])
+        del day_df
+        df.reset_index(drop=True, inplace=True)
+        df.to_csv(f'Datasets/{filename}.csv')
+        print(datetime.now(), f'{since} Saved!')
+    return df
+
+
 # emoticons
 def load_dict_emoticons():
     
@@ -233,7 +281,7 @@ def load_dict_contractions():
         }
 
 # Apply text cleaning techniques
-def clean_text(text):
+def clean_text(text, stop_words):
     '''Make text lowercase, remove mentions, remove links, convert emoticons/emojis to words, remove punctuation
     (except apostrophes), tokenize words (including contractions), convert contractions to full words,
     remove stop words.'''
@@ -250,22 +298,21 @@ def clean_text(text):
     
     # convert emoticons
     emoticons = load_dict_emoticons()
-    words = tweet.split()
+    words = text.split()
     words_edit = [emoticons[word] if word in emoticons else word for word in words]
     tweet = ' '.join(words_edit)
-    
-#     text = re.sub(r'[:;]{1}-*\(', 'sad face', text) , part 1
-#     text = re.sub(r'[:;]{1}-*\)', 'happy face', text) # convert emoticons, part 2
 
     # convert emojis
     text = emoji.demojize(text)
     text = text.replace(':', ' ') # separate emojis-words with space
     
     # remove punctuation
-    text = text.translate(str.maketrans('', '', '!"#$%&*()+,-./;<=>?@[\\]^_`{|}~')) 
+    text = text.replace('...', ' ') # special cases
+    text = text.replace('-', ' ')
+    text = text.translate(str.maketrans('', '', '!"$%&*()+,./;<=>?@[\\]^_`{|}~')) 
     
     # tokenize words
-    tokenizer = RegexpTokenizer("([a-zA-Z]+[0-9]*(?:'[a-zx]+)?)")
+    tokenizer = RegexpTokenizer("(#?[a-zA-Z]+[0-9]*(?:'[a-zx]+)?)")
     words = tokenizer.tokenize(text)
     
     # convert contractions
