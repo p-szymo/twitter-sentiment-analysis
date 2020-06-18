@@ -346,6 +346,12 @@ def clean_text(text, stop_words):
     
     return text
 
+def lda_getter(x):
+    '''Turn a list of tuples containing LDA topic weights into a dictionary
+       and grab the topic number with the highest weight.'''
+    x_dict = dict(x)
+    return int(max(x_dict, key=x_dict.get))
+
 def mask_pos_finder(text):
     pos = TextBlob(text)
     for tag in pos.tags:
