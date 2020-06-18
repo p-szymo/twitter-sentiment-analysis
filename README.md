@@ -67,7 +67,7 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we perfo
 ## List of files
 
 ## Visualizations
-
+![Word Cloud](Images/wordcloud_top100.jpg)
 
 
 
