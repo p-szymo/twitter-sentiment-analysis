@@ -68,13 +68,13 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we perfo
 
 ## Visualizations
 - Decision Tree Confusion Matrix:
-![Decision Tree Confusion Matrix](Images/dt_conf_matrix.jpg)
+![Decision Tree Confusion Matrix](Images/dt_conf_matrix.png)
 
 - Tweet Sentiment by LDA Topic:
 ![Tweet Sentiment by LDA Topic](Images/lda_sentiment_stacked_bar.png)
 
 - LDA Topics:
-![LDA Topics](Images/llda_topics.png)
+![LDA Topics](Images/lda_topics.png)
 
 - Sentiment Distribution of Top 20 Tweets per Day:
 ![Sentiment Distribution of Top 20 Tweets per Day](Images/sentiment_stacked_line_top20.png)
