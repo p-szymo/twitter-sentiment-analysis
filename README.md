@@ -67,7 +67,41 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we perfo
 ## List of files
 
 ## Visualizations
-![Word Cloud](Images/wordcloud_top100.jpg)
+- Decision Tree Confusion Matrix:
+![Decision Tree Confusion Matrix](Images/dt_conf_matrix.jpg)
+
+- Tweet Sentiment by LDA Topic:
+![Tweet Sentiment by LDA Topic](Images/lda_sentiment_stacked_bar.png)
+
+- LDA Topics:
+![LDA Topics](Images/llda_topics.png)
+
+- Sentiment Distribution of Top 20 Tweets per Day:
+![Sentiment Distribution of Top 20 Tweets per Day](Images/sentiment_stacked_line_top20.png)
+
+- Sentiment Distribution Over Time:
+![Sentiment Distribution Over Time](Images/sentiment_stacked_line.png)
+
+- Top 25 Words by Frequency:
+![Top 25 Words by Frequency](Images/top25_words_bar_twitter-blue.png)
+
+- Topic Distribution Over Time:
+![Topic Distribution Over Time](Images/topic_distribution_over_time.png)
+
+- Number of Negative Tweets by Topic:
+![Number of Negative Tweets by Topic](Images/tweet_count_by_topic_neg.png)
+
+- Number of Neutral Tweets by Topic:
+![Number of Neutral Tweets by Topic](Images/tweet_count_by_topic_neu.png)
+
+- Number of Positive Tweets by Topic:
+![Number of Positive Tweets by Topic](Images/tweet_count_by_topic_pos.png)
+
+- Word Cloud of Top 100 Words:
+![Word Cloud of Top 100 Words](Images/wordcloud_top100.jpg)
+
+- Word Cloud:
+![Word Cloud](Images/wordcloud.jpg)
 
 
 
