@@ -65,68 +65,69 @@ def search_loop(start_date, end_date, search, filename, username=None, drop_cols
 
 # emoticons
 def load_dict_emoticons():
-    
+    '''Dictionary of emoticons as keys and their word equivalents as values.'''
     return {
-        ":‑)":"smiley",
-        ":-]":"smiley",
-        ":-3":"smiley",
-        ":->":"smiley",
-        "8-)":"smiley",
-        ":-}":"smiley",
-        ":)":"smiley",
-        ":]":"smiley",
-        ":3":"smiley",
-        ":>":"smiley",
-        "8)":"smiley",
-        ":}":"smiley",
-        ":o)":"smiley",
-        ":c)":"smiley",
-        ":^)":"smiley",
-        "=]":"smiley",
-        "=)":"smiley",
-        ":-))":"smiley",
-        ":‑D":"smiley",
-        "8‑D":"smiley",
-        "x‑D":"smiley",
-        "X‑D":"smiley",
-        ":D":"smiley",
-        "8D":"smiley",
-        "xD":"smiley",
-        "XD":"smiley",
-        ":‑(":"sad",
-        ":‑c":"sad",
-        ":‑<":"sad",
-        ":‑[":"sad",
-        ":(":"sad",
-        ":c":"sad",
-        ":<":"sad",
-        ":[":"sad",
-        ":-||":"sad",
-        ">:[":"sad",
-        ":{":"sad",
-        ":@":"sad",
-        ">:(":"sad",
-        ":'‑(":"sad",
-        ":'(":"sad",
-        ":‑P":"playful",
-        "X‑P":"playful",
-        "x‑p":"playful",
-        ":‑p":"playful",
-        ":‑Þ":"playful",
-        ":‑þ":"playful",
-        ":‑b":"playful",
-        ":P":"playful",
-        "XP":"playful",
-        "xp":"playful",
-        ":p":"playful",
-        ":Þ":"playful",
-        ":þ":"playful",
-        ":b":"playful",
-        "<3":"love"
+        ":‑)": "smiley",
+        ":-]": "smiley",
+        ":-3": "smiley",
+        ":->": "smiley",
+        "8-)": "smiley",
+        ":-}": "smiley",
+        ":)": "smiley",
+        ":]": "smiley",
+        ":3": "smiley",
+        ":>": "smiley",
+        "8)": "smiley",
+        ":}": "smiley",
+        ":o)": "smiley",
+        ":c)": "smiley",
+        ":^)": "smiley",
+        "=]": "smiley",
+        "=)": "smiley",
+        ":-))": "smiley",
+        ":‑D": "smiley",
+        "8‑D": "smiley",
+        "x‑D": "smiley",
+        "X‑D": "smiley",
+        ":D": "smiley",
+        "8D": "smiley",
+        "xD": "smiley",
+        "XD": "smiley",
+        ":‑(": "sad",
+        ":‑c": "sad",
+        ":‑<": "sad",
+        ":‑[": "sad",
+        ":(": "sad",
+        ":c": "sad",
+        ":<": "sad",
+        ":[": "sad",
+        ":-||": "sad",
+        ">:[": "sad",
+        ":{": "sad",
+        ":@": "sad",
+        ">:(": "sad",
+        ":'‑(": "sad",
+        ":'(": "sad",
+        ":‑P": "playful",
+        "X‑P": "playful",
+        "x‑p": "playful",
+        ":‑p": "playful",
+        ":‑Þ": "playful",
+        ":‑þ": "playful",
+        ":‑b": "playful",
+        ":P": "playful",
+        "XP": "playful",
+        "xp": "playful",
+        ":p": "playful",
+        ":Þ": "playful",
+        ":þ": "playful",
+        ":b": "playful",
+        "<3": "love"
         }
 
 # self defined contractions
 def load_dict_contractions():
+    '''Dictionary of contractions as keys and their expanded words as values.'''
     
     return {
         "ain't": "is not",
@@ -352,8 +353,9 @@ def lda_getter(x):
     x_dict = dict(x)
     return int(max(x_dict, key=x_dict.get))
 
-def mask_pos_finder(text):
+def mask_pos_finder(text, word):
+    '''Find and return the part-of-speech tag for a particular word.'''
     pos = TextBlob(text)
     for tag in pos.tags:
-        if 'mask' in tag[0]:
+        if word in tag[0]:
             return tag[1]
