@@ -67,16 +67,18 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we perfo
 ##### The overall sentiment of tweets was fairly evenly divided between positive and negative throughout the five months. There were some interesting results from our prediction models, namely that some continuous variables like subjectivity score, number of likes, and number of replies were some of the most important variables for predicting a tweet's sentiment. Other important features were words with high frequencies. Given more time we would try to get better accuracy via a deep learning model, including an LSTM model. And finally, we would like to further investigate sentiment toward the work mask (or masks) in particular as opposed to the overall sentiment of the tweet as a whole.
 
 ## List of files
-- **Images** folder - charts and visualizations created during the project
 - **.gitignore** - list of files and pathways to ignore
-- **README.md** - this very file!
 - **data_cleaning_notebook.ipynb** - notebook of compiling our dataframes
 - **eda_visualizations_notebook.ipynb** - notebook with EDA and chart/visualization creations
 - **functions.py** - file with functions used in this project
 - **modeling_notebook.ipynb** - notebook with Naive Bayes and Decision Tree models
 - **nlp_features_notebook.ipynb** - notebook with text processing, LDA topic modeling, and subjectivity scoring
-- **twitter_scraping_notebook.ipynb** - notebook detailing our scraping of tweets
 - **presentation.pdf** - slides for our presentation of this project
+- **README.md** - this very file!
+- **twitter_scraping_notebook.ipynb** - notebook detailing our scraping of tweets
+- **archives** folder - old jupyter notebooks, mostly scrap
+- **images** folder - charts and visualizations created during the project
+- **models** folder - tweet count vectors and a couple of lda topic models (note: unfortunately not the one in our presentation)
 
 ## Visualizations
 - Decision Tree Confusion Matrix:
