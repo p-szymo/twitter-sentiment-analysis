@@ -16,9 +16,24 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we perfo
 
 ## Findings
 - Tweets were generally more negative in January but relatively constant from February through May (there were also far fewer relevant tweets in January).
+
 - After removing common English stopwords as well as topical stopwords like mask, and virus, the top ten most frequently occuring words were: hand, need, spread, protect, make, help, say, glove, public, and hospital.
+
+- A 10-topic LDA model grouped words into the following topics with the following predominant sentiment:
+  1. Healthcare workers, hospitals: split positive/negative
+  2. Social distancing: positive
+  3. Protesting, lockdowns: positive
+  4. Government, health organizations: negative
+  5. Spreading the virus: positive
+  6. Emojis, swear words: positive
+  7. COVID19 statistics: split positive/negative
+  8. Preventing infection: positive
+  9. General opinions: negative
+  10. Riots, BLM: neutral
+
 - Topic modeling provided some interesting insights but was not helpful in prediction modeling.
-- Some of the features that prediction models weighed the heaviest were quite surprising:
+
+- Some of the features that prediction models weighed the heaviest were surprising:
 	- Subjectivity Score
 	- Number of likes
 	- Number of retweets
