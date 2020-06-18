@@ -76,6 +76,7 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we perfo
 - **modeling_notebook.ipynb** - notebook with Naive Bayes and Decision Tree models
 - **nlp_features_notebook.ipynb** - notebook with text processing, LDA topic modeling, and subjectivity scoring
 - **twitter_scraping_notebook.ipynb** - notebook detailing our scraping of tweets
+- **presentation.pdf** - slides for our presentation of this project
 
 ## Visualizations
 - Decision Tree Confusion Matrix:
