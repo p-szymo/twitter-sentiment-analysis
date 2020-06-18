@@ -63,21 +63,8 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we perfo
     'hand'              (0.0076)
     Number of replies   (0.0072)
 
-### 10 topic summaries (via LDA):
-    0.   Healthcare workers, hospitals
-    1.   Social distancing
-    2.   Protesting, lockdowns
-    3.   Government, health organizations
-    4.   Spreading the virus
-    5.   Emojis, swear words
-    6.   COVID19 statistics
-    7.   Preventing infection
-    8.   General opinions
-    9.   Riots, BLM
-
 
 # Final conclusion
-* I can run my final model on the data collected by volunteers and compile a list of trees that whose health statuses do not line up. In the meantime, the NYC Street Trees Census is fairly thorough and rife with opportunities for data exploration and predictive modeling. Perhaps with a neural network, I could greatly improve my model. In future censuses, even more data could be gathered (especially in regard to specificity) that will increase these opportunities for prediction even further.
 
 ## List of files
 
