@@ -132,6 +132,9 @@ dmypy.json
 #####
 #####
 
+# DS Store
+.DS_Store
+
 # Datasets
 /Datasets/*
 /5K_Datasets/*
