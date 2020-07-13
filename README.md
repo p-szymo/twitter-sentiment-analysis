@@ -3,16 +3,16 @@
 ## Approach
 Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we perform natural language processing (NLP) techniques to analyze the sentiment of tweets relating to masks and coronavirus and classify them as Negative, Neutral or Positive. Through text processing, exploratory data analysis and feature engineering, we discover insights into how important words, topics, and subjectivity relate to sentiment. We then create predictive models to provide further insight and confirm our findings during EDA.
 
-### Some questions:
-* How does the sentiment of tweets change over time?
-    * Hypothesis: Tweets will be more negative on average in January and get more positive on average as time goes on.
-* Will Twitter stats (number of likes, replies, retweets) play a role in determining sentiment?
-    * Hypothesis: The most important features will most likely be the words themselves.
-* Does topic modeling provide any insight toward tweet sentiment or the COVID-19 crisis?
-    * Hypothesis: Topic modeling should be a factor in determining sentiment and can give us insights into the pandemic.
-* What insights can be provided by using machine learning?
-    * Hypothesis: The lion's share of the insights will come during EDA.
-* What are the most frequent words? And do they play a role in determining sentiment?
+#### Answer the following questions:
+- *How does the sentiment of tweets change over time?*
+    - *Hypothesis*: Tweets will be more negative on average in January and get more positive on average as time goes on.
+- *Will Twitter stats (number of likes, replies, retweets) play a role in determining sentiment?*
+    - *Hypothesis*: The most important features will most likely be the words themselves.
+- *Does topic modeling provide any insight toward tweet sentiment or the COVID-19 crisis?*
+    - *Hypothesis*: Topic modeling should be a factor in determining sentiment and can give us insights into the pandemic.
+- *What insights can be provided by using machine learning?*
+    - *Hypothesis*: The lion's share of the insights will come during EDA.
+- *What are the most frequent words? And do they play a role in determining sentiment?*
 
 ## Findings
 - Tweets were generally more negative in January but relatively constant from February through May (there were also far fewer relevant tweets in January).
@@ -68,14 +68,14 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we perfo
 
 ## List of files
 - **.gitignore** - list of files and pathways to ignore
-- **data_cleaning_notebook.ipynb** - notebook of compiling our dataframes
-- **eda_visualizations_notebook.ipynb** - notebook with EDA and chart/visualization creations
+- **01_twitter_scraping_notebook.ipynb** - notebook detailing our scraping of tweets
+- **02_data_cleaning_notebook.ipynb** - notebook of compiling our dataframes
+- **03a_nlp_features_notebook.ipynb** - notebook with text processing, LDA topic modeling, and subjectivity scoring
+- **03b_eda_visualizations_notebook.ipynb** - notebook with EDA and chart/visualization creations
+- **04_modeling_notebook.ipynb** - notebook with Naive Bayes and Decision Tree models
 - **functions.py** - file with functions used in this project
-- **modeling_notebook.ipynb** - notebook with Naive Bayes and Decision Tree models
-- **nlp_features_notebook.ipynb** - notebook with text processing, LDA topic modeling, and subjectivity scoring
 - **presentation.pdf** - slides for our presentation of this project
 - **README.md** - this very file!
-- **twitter_scraping_notebook.ipynb** - notebook detailing our scraping of tweets
 - **archives** folder - old jupyter notebooks, mostly scrap
 - **images** folder - charts and visualizations created during the project
 - **models** folder - tweet count vectors and a couple of lda topic models (note: unfortunately not the one in our presentation)
