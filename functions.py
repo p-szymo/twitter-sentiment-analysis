@@ -1,11 +1,14 @@
+# dataframe libraries
 import numpy as np
 import pandas as pd
-import twint
 
-# Fixes runtime errors with twint
+# twitter scraper
+import twint
+# fixes runtime errors with twint
 import nest_asyncio
 nest_asyncio.apply()
 
+# text processing
 import nltk
 from nltk import RegexpTokenizer
 from nltk.stem import WordNetLemmatizer 
@@ -15,14 +18,29 @@ import re
 import string
 import emoji
 
+
 # twitter scrape
 def twint_search(search, username=None, since=None, until=None, drop_cols=None, limit=None):
+    
     '''
-    Function to return a pandas dataframe of tweets in English containing search terms using twint.
-    Required parameter: search term.
-    Optional parameters: username, start date (since) and end date (until) to search, columns to drop, maximum number of tweets (limit).
+    Function to return a Pandas DataFrame of tweets in English containing search terms using twint.
+    
+    Input a search term as a string. NOTE: use of 'OR', 'AND', and other search commands is supported.
+    
+    Optional inputs include:
+                username: Twitter handle
+                since: start date of search
+                until: end date of search
+                drop_cols: columns of tweet data to drop
+                limit: maximum number of tweets to scrape
+                
+    Output a Pandas DataFrame.
     '''
+    
+    # instantiate twint object
     c = twint.Config()
+    
+    # set parameters
     c.Lang = 'en'
     c.Search = search
     c.Username = username
@@ -30,42 +48,81 @@ def twint_search(search, username=None, since=None, until=None, drop_cols=None, 
     c.Until = until
     c.Limit = limit
     c.Pandas = True
-    # Hide the printing of every tweet during scrape
+    
+    # hide the printing of every tweet during scrape
     c.Hide_output = True
+    
+    # scrape
     twint.run.Search(c)
+    
+    # store as pandas dataframe
     df = twint.storage.panda.Tweets_df
-    # Transform date string into datetime object
+    
+    # transform date string into datetime object
     df['date'] = pd.to_datetime(df['date']).dt.date
+    
     return df
+
 
 # looping twitter scrape and creating dataframe
 def search_loop(start_date, end_date, search, filename, username=None, drop_cols=None, limit=None):
+    
     '''
     Function to loop over date range and perform twint_search function for each day, returning one combined dataframe.
     Periodically saves progress to CSV after each daily search.
-    Required parameters: start date, end date, search term.
-    Optional parameters: username, columns to drop, maximum number of tweets per day (limit).
+    
+    Input a start date, end date, search time, and file name (where to save CSV file).
+    
+    Optional inputs include:
+                username: Twitter handle
+                drop_cols: columns of tweet data to drop
+                limit: maximum number of tweets to scrape
+                
+    Output a Pandas DataFrame. Also saves as CSV.
     '''
+    
+    # instantiate empty dataframe
     df = pd.DataFrame()
+    
+    # create panda series of desired dates
     date_range = pd.Series(pd.date_range(start_date, end_date))
+    
+    # loop over dates
     for d in range(len(date_range) - 1):
+        
+        # obtain target date
         since = date_range[d].strftime('%Y-%m-%d')
+        
+        # obtain stop date
         until = date_range[d + 1].strftime('%Y-%m-%d')
+        
+        # scrape date to temporary dataframe
         day_df = twint_search(search=search, username=username, since=since, until=until, drop_cols=drop_cols, limit=limit)
-        # Drop empty columns
+        
+        # drop empty columns
         day_df.drop(columns=drop_cols, axis=1, inplace=True)
-        # Add new daily data to dataframe, reset index, save to CSV
+        
+        # add new daily data to dataframe, delete temporary dataframe, reset index, save to CSV
         df = pd.concat([df, day_df])
         del day_df
         df.reset_index(drop=True, inplace=True)
         df.to_csv(f'Datasets/{filename}.csv')
+        
+        # notification of successful scrape
         print(datetime.now(), f'{since} Saved!')
+        
     return df
 
 
 # emoticons
 def load_dict_emoticons():
-    '''Dictionary of emoticons as keys and their word equivalents as values.'''
+    
+    '''
+    Load a dictionary of emoticons as keys and their word equivalents as values.
+    
+    Source: https://towardsdatascience.com/twitter-sentiment-analysis-using-fasttext-9ccd04465597    
+    '''
+    
     return {
         ":‑)": "smiley",
         ":-]": "smiley",
@@ -125,9 +182,14 @@ def load_dict_emoticons():
         "<3": "love"
         }
 
+
 # self defined contractions
 def load_dict_contractions():
-    '''Dictionary of contractions as keys and their expanded words as values.'''
+    '''
+    Load a dictionary of contractions as keys and their expanded words as values.
+    
+    Source: https://towardsdatascience.com/twitter-sentiment-analysis-using-fasttext-9ccd04465597  
+    '''
     
     return {
         "ain't": "is not",
@@ -298,11 +360,19 @@ def load_dict_contractions():
         "sux": "sucks"
         }
 
-# Apply text cleaning techniques
+
+# apply text cleaning techniques
 def clean_text(text, stop_words):
-    '''Make text lowercase, remove mentions, remove links, convert emoticons/emojis to words, remove punctuation
+    
+    '''
+    Input text (a tweet) as a string and a list of stop words.
+    
+    Make text lowercase, remove mentions, remove links, convert emoticons and emojis to words, remove punctuation
     (except apostrophes), tokenize words (including contractions), convert contractions to full words,
-    remove stop words.'''
+    remove stop words.
+    
+    Output processed text as a string.
+    '''
     
     # make text lowercase
     text = text.lower() 
@@ -347,15 +417,42 @@ def clean_text(text, stop_words):
     
     return text
 
+
 def lda_getter(x):
-    '''Turn a list of tuples containing LDA topic weights into a dictionary
-       and grab the topic number with the highest weight.'''
+    
+    '''
+    Input a list of tuples containing LDA topic weights.
+    
+    Convert to a dictionary and find the topic number with the highest weight.
+    
+    Output LDA topic number.
+    '''
+    
+    # dictionary
     x_dict = dict(x)
-    return int(max(x_dict, key=x_dict.get))
+    
+    # obtain max topic weight and convert to integer
+    topic = int(max(x_dict, key=x_dict.get))
+    
+    return topic
+
 
 def mask_pos_finder(text, word):
-    '''Find and return the part-of-speech tag for a particular word.'''
+    
+    '''
+    Input text as a string and a target word as a string.
+    
+    Find and return the part-of-speech (POS) tag for target word.
+    
+    Output POS tag as a string.
+    '''
+    
+    # analyze text using TextBlob
     pos = TextBlob(text)
+    
+    # loop over list of POS tags
     for tag in pos.tags:
+        
+        # find and return POS tag
         if word in tag[0]:
             return tag[1]
