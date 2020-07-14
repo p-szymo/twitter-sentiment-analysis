@@ -104,6 +104,9 @@ The overall sentiment of tweets was fairly evenly divided between positive and n
 - Tweet Sentiment by LDA Topic:
 ![Tweet Sentiment by LDA Topic](charts/sentiment_topics_barstack.png)
 
+- Topic Distribution by Sentiment:
+![Topic Distribution Over Time](charts/sentiment_topics_each_sentiment_barstack.png)
+
 <!-- - Decision Tree Confusion Matrix:
 ![Decision Tree Confusion Matrix](Images/dt_conf_matrix.png) -->
 
