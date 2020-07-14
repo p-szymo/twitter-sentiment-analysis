@@ -431,7 +431,7 @@ def lda_getter(x):
     # dictionary
     x_dict = dict(x)
     
-    # obtain max topic weight and convert to integer
+    # obtain topic with highest weight and convert to integer
     topic = int(max(x_dict, key=x_dict.get))
     
     return topic
