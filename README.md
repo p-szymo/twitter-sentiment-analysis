@@ -20,16 +20,16 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we use n
 - After removing common English stopwords as well as topical stopwords like mask, and virus, the top ten most frequently occuring words were: hand, need, spread, protect, make, help, say, glove, public, and hospital.
 
 - A 10-topic LDA model grouped words into the following topics with the following predominant sentiment:
-  1. Healthcare workers, hospitals: split positive/negative
-  2. Social distancing: positive
-  3. Protesting, lockdowns: positive
-  4. Government, health organizations: negative
-  5. Spreading the virus: positive
-  6. Emojis, swear words: positive
-  7. COVID19 statistics: split positive/negative
-  8. Preventing infection: positive
-  9. General opinions: negative
-  10. Riots, BLM: neutral
+  1. Protests, without masks: split positive/negative
+  2. Mask ads: split positive/negative/neutral
+  3. Biden, social distancing: split positive/negative
+  4. Social distancing, protect others: positive
+  5. Fauci, regulations: positive
+  6. Lockdown, testing: split positive/negative
+  7. News, statistics: neutral
+  8. Trump, protests: split positive/negative/neutral
+  9. Protests, essential services: neutral
+  10. Social distancing, death, Trump: negative
 
 - Topic modeling provided some interesting insights but was not helpful in prediction modeling.
 
@@ -40,6 +40,7 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we use n
 
 ## Most prevalent features in the model (in order)
 ### 10 most common words (after removing stopwords):
+    'hand'
     'need'
     'spread'
     'protect'
@@ -49,7 +50,6 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we use n
     'glove'
     'public'
     'hospital'
-    'new'
 
 ### 10 best features (Decision Tree Classifier):
     Subjectivity score  (0.0611)
@@ -70,7 +70,7 @@ The overall sentiment of tweets was fairly evenly divided between positive and n
 - **.gitignore** - list of files and pathways to ignore
 - **01_twitter_scraping_notebook.ipynb** - notebook detailing our scraping of tweets
 - **02_data_cleaning_notebook.ipynb** - notebook of compiling our dataframes
-- **03a_nlp_features_eda_notebook.ipynb** - notebook with text processing, LDA topic modeling, subjectivity scoring, EDA, and visualizations
+- **03_nlp_features_eda_notebook.ipynb** - notebook with text processing, LDA topic modeling, subjectivity scoring, EDA, and visualizations
 - **04_modeling_notebook.ipynb** - notebook with Naive Bayes and Decision Tree models
 - **functions.py** - file with functions used in this project
 - **presentation.pdf** - slides for our presentation of this project
