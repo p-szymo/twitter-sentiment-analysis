@@ -35,28 +35,28 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we use n
 
 ## Most prevalent features in the model (in order)
 ### 10 most common words (after removing stopwords):
-    *hand*
-    *need*
-    *spread*
-    *protect*
-    *make*
-    *help*
-    *say*
-    *glove*
-    *public*
-    *hospital*
+    'hand'
+    'need'
+    'spread'
+    'protect'
+    'make'
+    'help'
+    'say'
+    'glove'
+    'public'
+    'hospital'
 
 ### 10 best features (Decision Tree Classifier):
-    *protect*   (0.0153)
-    *infected*  (0.0141)
-    *help*      (0.0138)
-    *safe*      (0.0129)
-    *hand*      (0.0110)
-    *death*     (0.0096)
-    *fight*     (0.0095)
-    *sick*      (0.0094)
-    *please*    (0.0092)
-    *stop*      (0.0091)
+    'protect'   (0.0153)
+    'infected'  (0.0141)
+    'help'      (0.0138)
+    'safe'      (0.0129)
+    'hand'      (0.0110)
+    'death'     (0.0096)
+    'fight'     (0.0095)
+    'sick'      (0.0094)
+    'please'    (0.0092)
+    'stop'      (0.0091)
 
 # Final conclusion
 The overall sentiment of tweets was fairly evenly divided between positive and negative throughout the five months. Our numerical data proved ineffective within our prediction models, so we ran models using only word vectors. Many of the words that were in the top 10 features make sense given the subject matter and do indeed relate directly to masks and the pandemic. Given more time we would try to get better accuracy via a deep learning model, most likely an LSTM model. Within that, and potentially within other models, we would like to try using pre-trained word vectors to see if that would provide us with better accuracy. Finally, we would like to further investigate sentiment toward the work mask (or masks) in particular as opposed to the overall sentiment of the tweet as a whole.
