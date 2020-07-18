@@ -20,51 +20,46 @@ Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we use n
 - After removing common English stopwords as well as topical stopwords like mask, and virus, the top ten most frequently occuring words were: hand, need, spread, protect, make, help, say, glove, public, and hospital.
 
 - A 10-topic LDA model grouped words into the following topics with the following predominant sentiment:
-  1. Protests, without masks: split positive/negative
-  2. Mask ads: split positive/negative/neutral
-  3. Biden, social distancing: split positive/negative
-  4. Social distancing, protect others: positive
-  5. Fauci, regulations: positive
-  6. Lockdown, testing: split positive/negative
-  7. News, statistics: neutral
-  8. Trump, protests: split positive/negative/neutral
-  9. Protests, essential services: neutral
-  10. Social distancing, death, Trump: negative
+    1. Protests, without masks            *split positive/negative*
+    2. Mask advertisements                *split positive/negative/neutral*
+    3. Biden, social distancing           *split positive/negative*
+    4. Social distancing, protect others  *mostly positive*
+    5. Fauci, regulations                 *mostly positive*
+    6. Lockdown, testing                  *split positive/negative*
+    7. News, statistics                   *mostly neutral*
+    8. Trump, protests                    *split positive/negative/neutral*
+    9. Protests, essential services       *mostly neutral*
+    10. Social distancing, death, Trump   *mostly negative*
 
-- Topic modeling provided some interesting insights but was not helpful in prediction modeling.
-
-- Some of the features that prediction models weighed the heaviest were surprising:
-	- Subjectivity Score
-	- Number of likes
-	- Number of retweets
+- Topic modeling provided some interesting insights but was not helpful in our best prediction models.
 
 ## Most prevalent features in the model (in order)
 ### 10 most common words (after removing stopwords):
-    'hand'
-    'need'
-    'spread'
-    'protect'
-    'make'
-    'help'
-    'say'
-    'glove'
-    'public'
-    'hospital'
+    *hand*
+    *need*
+    *spread*
+    *protect*
+    *make*
+    *help*
+    *say*
+    *glove*
+    *public*
+    *hospital*
 
 ### 10 best features (Decision Tree Classifier):
-    Subjectivity score  (0.0611)
-    Number of likes     (0.0139)
-    'protect'           (0.0132)
-    'help'              (0.0129)
-    'infected'          (0.0115)
-    'safe'              (0.0094)
-    'please'            (0.0083)
-    'death'             (0.0083)
-    'hand'              (0.0076)
-    Number of replies   (0.0072)
+    *protect*   (0.0153)
+    *infected*  (0.0141)
+    *help*      (0.0138)
+    *safe*      (0.0129)
+    *hand*      (0.0110)
+    *death*     (0.0096)
+    *fight*     (0.0095)
+    *sick*      (0.0094)
+    *please*    (0.0092)
+    *stop*      (0.0091)
 
 # Final conclusion
-The overall sentiment of tweets was fairly evenly divided between positive and negative throughout the five months. There were some interesting results from our prediction models, namely that some continuous variables like subjectivity score, number of likes, and number of replies were some of the most important variables for predicting a tweet's sentiment. Other important features were words with high frequencies. Given more time we would try to get better accuracy via a deep learning model, including an LSTM model. And finally, we would like to further investigate sentiment toward the work mask (or masks) in particular as opposed to the overall sentiment of the tweet as a whole.
+The overall sentiment of tweets was fairly evenly divided between positive and negative throughout the five months. Our numerical data proved ineffective within our prediction models, so we ran models using only word vectors. Many of the words that were in the top 10 features make sense given the subject matter and do indeed relate directly to masks and the pandemic. Given more time we would try to get better accuracy via a deep learning model, most likely an LSTM model. Within that, and potentially within other models, we would like to try using pre-trained word vectors to see if that would provide us with better accuracy. Finally, we would like to further investigate sentiment toward the work mask (or masks) in particular as opposed to the overall sentiment of the tweet as a whole.
 
 ## List of files
 - **.gitignore** - list of files and pathways to ignore
@@ -110,5 +105,5 @@ The overall sentiment of tweets was fairly evenly divided between positive and n
 <!-- - Decision Tree Confusion Matrix:
 ![Decision Tree Confusion Matrix](Images/dt_conf_matrix.png) -->
 
-### BLOG POST FORTHCOMING
+## Check out our [blog post](https://medium.com/@joshua.szymanowski/masks-throughout-covid-19-8e0af97ec33c)
 
