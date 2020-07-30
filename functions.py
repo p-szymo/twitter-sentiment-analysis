@@ -177,7 +177,8 @@ def search_loop(
 # emoticons
 def load_dict_emoticons():
     '''
-    Load a dictionary of emoticons as keys and their word equivalents as values.
+    Load a dictionary of emoticons as keys and their word equivalents 
+    as values.
 
     Source
     ------
@@ -247,7 +248,8 @@ def load_dict_emoticons():
 # self defined contractions
 def load_dict_contractions():
     '''
-    Load a dictionary of contractions as keys and their expanded words as values.
+    Load a dictionary of contractions as keys and their expanded words 
+    as values.
 
     Source
     ------
@@ -526,12 +528,15 @@ def mask_pos_finder(text, word):
 
     Input
     -----
-    text : str, text to be analyzed
-    word : str, target word in the text
+    text : str
+        Text to be analyzed.
+    word : str
+        Target word in the text.
 
     Output
     ------
-    tag[1] : str, POS tag
+    tag[1] : str
+        POS tag.
     '''
 
     # analyze text using TextBlob
@@ -549,28 +554,32 @@ def plot_confusion_matrix(cm, classes,
                           normalize=False,
                           title='Confusion matrix',
                           cmap=plt.cm.Blues):
-    
     '''
     This function prints and plots a model's confusion matrix.
-    
+
     Input
     -----
-    cm : sklearn confusion matrix, 
+    cm : sklearn confusion matrix
         `sklearn.metrics.confusion_matrix(y_true, y_pred)`
-    classes : list, names of target classes 
-    
+    classes : list (str)
+        Names of target classes.
+
     Optional input
     --------------
-    normalize : bool, whether to apply normalization (default=False)
+    normalize : bool
+        Whether to apply normalization (default=False).
         Normalization can be applied by setting `normalize=True`.
-    title : str, title of the returned plot
+    title : str
+        Title of the returned plot.
     cmap : matplotlib color map
-    
+        For options, visit:
+        `https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html`
+
     Output
     ------
     Prints a stylized confusion matrix.
-    
-    
+
+
     [Code modified from work by Sean Abu Wilson.]
     '''
     
