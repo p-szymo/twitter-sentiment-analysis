@@ -139,4 +139,5 @@ dmypy.json
 /data
 
 # temp backups
+01_twitter_scraping_notebook-Copy1.ipynb
 04_modeling_notebook-Copy1.ipynb
