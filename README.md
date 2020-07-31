@@ -1,18 +1,18 @@
 # #Masks Throughout COVID-19: A Twitter Sentiment Analysis
 
-## Approach
-Using [twint](https://github.com/twintproject/twint) to scrape Twitter, we use natural language processing (NLP) techniques to analyze the sentiment of tweets relating to masks and coronavirus and classify them as *negative*, *neutral*, or *positive*. Through text processing, exploratory data analysis and feature engineering, we discover insights into how important words, topics, and subjectivity relate to sentiment. We then create predictive models to provide further insight and confirm our findings during EDA.
+## Summary
+After scraping Twitter with [twint](https://github.com/twintproject/twint), we use natural language processing (NLP) techniques to analyze the sentiment of tweets relating to masks and coronavirus and classify them as *negative*, *neutral*, or *positive*.
 
-#### Answer the following questions:
-- *How does the sentiment of tweets change over time?*
-    - *Hypothesis*: Tweets will be more negative on average in January and get more positive on average as time goes on.
-- *Will Twitter stats (number of likes, replies, retweets) play a role in determining sentiment?*
-    - *Hypothesis*: The most important features will most likely be the words themselves.
-- *Does topic modeling provide any insight toward tweet sentiment or the COVID-19 crisis?*
-    - *Hypothesis*: Topic modeling should be a factor in determining sentiment and can give us insights into the pandemic.
-- *What insights can be provided by using machine learning?*
-    - *Hypothesis*: The lion's share of the insights will come during EDA.
-- *What are the most frequent words? And do they play a role in determining sentiment?*
+Through text processing, exploratory data analysis and feature engineering, we discover insights into how important words, topics, and subjectivity relate to sentiment.
+
+We then create predictive models to provide further insight and confirm our findings during EDA.
+
+## Objectives
+1. Investigate how the sentiment of tweets change over time.
+2. Explore data and find any meaningful differences in language between positive, negative, and neutral tweets. Addtionally, look at the role that Twitter stats (number of likes, replies, retweets) play in determining sentiment, if any. 
+3. Engineer features by processing text and using LDA topic modeling to provide any insight toward tweet sentiment.
+4. Build a classification model to discover which features play a strong role in the polarity of a tweet.
+5. Calculate most frequent words and determine their relationship to tweet sentiment.
 
 ## Findings
 - Tweets were generally more negative in January but relatively constant from February through May (there were also far fewer relevant tweets in January).
