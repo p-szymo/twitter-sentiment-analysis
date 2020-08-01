@@ -29,8 +29,9 @@ def twint_search(
         drop_cols=None,
         limit=None):
     '''
-    Function to return a Pandas DataFrame of tweets in English containing
-    search terms using twint.
+    Function to scrape Twitter using Twint (`https://github.com/twintproject/twint`).
+    Returns a Pandas DataFrame of tweets (in English) that contain search terms
+    entered by the user.
 
     Input
     -----

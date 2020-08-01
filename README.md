@@ -1,7 +1,7 @@
 # #Masks Throughout COVID-19: A Twitter Sentiment Analysis
 
 ## Summary
-After scraping Twitter with [twint](https://github.com/twintproject/twint), we use natural language processing (NLP) techniques to analyze the sentiment of tweets relating to masks and coronavirus and classify them as *negative*, *neutral*, or *positive*.
+After scraping Twitter with [Twint](https://github.com/twintproject/twint), we use natural language processing (NLP) techniques to analyze the sentiment of tweets relating to masks and coronavirus and classify them as *negative*, *neutral*, or *positive*.
 
 Through text processing, exploratory data analysis and feature engineering, we discover insights into how important words, topics, and subjectivity relate to sentiment.
 
