@@ -15,6 +15,7 @@ We then create predictive models to provide further insight and confirm our find
 5. Calculate most frequent words and determine their relationship to tweet sentiment.
 
 ## Findings
+1. 
 - Tweets were generally more negative in January but relatively constant from February through May (there were also far fewer relevant tweets in January).
 
 - After removing common English stopwords as well as topical stopwords like mask, and virus, the top ten most frequently occuring words were: hand, need, spread, protect, make, help, say, glove, public, and hospital.
