@@ -252,7 +252,7 @@ def load_dict_contractions():
     Load a dictionary of contractions as keys and their expanded words 
     as values.
 
-    Source
+    Source (modified)
     ------
     https://towardsdatascience.com/twitter-sentiment-analysis-using-fasttext-9ccd04465597
     '''
@@ -269,8 +269,6 @@ def load_dict_contractions():
         "couldn't've": "could not have",
         "could've": "could have",
         "daren't": "dare not",
-        "daresn't": "dare not",
-        "dasn't": "dare not",
         "didn't": "did not",
         "doesn't": "does not",
         "don't": "do not",
@@ -291,7 +289,7 @@ def load_dict_contractions():
         "he'd": "he would",
         "he'd've": "he would have",
         "he'll": "he will",
-        "he'll've": "he he will have",
+        "he'll've": "he will have",
         "he's": "he is",
         "how'd": "how would",
         "how'll": "how will",
@@ -423,7 +421,142 @@ def load_dict_contractions():
         "you've": "you have",
         "Whatcha": "What are you",
         "luv": "love",
-        "sux": "sucks"
+        "sux": "sucks",
+        "abt": "about",
+        "aint": "is not",
+        "amnt": "am not",
+        "arent": "are not",
+        "cant": "cannot",
+        "cantve": "cannot have",
+        "cuz": "because",
+        "couldnt": "could not",
+        "couldntve": "could not have",
+        "couldve": "could have",
+        "darent": "dare not",
+        "didnt": "did not",
+        "doesnt": "does not",
+        "dont": "do not",
+        "dyou": "do you",
+        "eer": "ever",
+        "everyones": "everyone is",
+        "gon": "going to",
+        "hadnt": "had not",
+        "hadntve": "had not have",
+        "hasnt": "has not",
+        "havent": "have not",
+        "hed": "he would",
+        "hedve": "he would have",
+        "hellve": "he will have",
+        "hes": "he is",
+        "howd": "how would",
+        "howll": "how will",
+        "howre": "how are",
+        "hows": "how is",
+        "id": "i would",
+        "idve": "i would have",
+        "illve": "i will have",
+        "im": "i am",
+        "ima": "i am about to",
+        "isnt": "is not",
+        "itd": "it would",
+        "itdve": "it would have",
+        "itll": "it will",
+        "itllve": "it will have",
+        "ive": "i have",
+        "lets": "let us",
+        "maam": "madam",
+        "maynt": "may not",
+        "mayve": "may have",
+        "mightnt": "might not",
+        "mightntve": "might not have",
+        "mightve": "might have",
+        "mustnt": "must not",
+        "mustntve": "must not have",
+        "mustve": "must have",
+        "neednt": "need not",
+        "needntve": "need not have",
+        "neer": "never",
+        "oclock": "of the clock",
+        "oer": "over",
+        "ol": "old",
+        "oughtnt": "ought not",
+        "oughtntve": "ought not have",
+        "shallnt": "shall not",
+        "shant": "shall not",
+        "shantve": "shall not have",
+        "shedve": "she would have",
+        "shellve": "she will have",
+        "shes": "she is",
+        "shouldnt": "should not",
+        "shouldntve": "should not have",
+        "shouldve": "should have",
+        "sove": "so have",
+        "somebodys": "somebody is",
+        "someones": "someone is",
+        "somethings": "something is",
+        "thatd": "that would",
+        "thatdve": "that would have",
+        "thatll": "that will",
+        "thatre": "that are",
+        "thats": "that is",
+        "thered": "there would",
+        "theredve": "there would have",
+        "therell": "there will",
+        "therere": "there are",
+        "theres": "there is",
+        "thesere": "these are",
+        "theyd": "they would",
+        "theydve": "they would have",
+        "theyll": "they will",
+        "theyllve": "they will have",
+        "theyre": "they are",
+        "theyve": "they have",
+        "thiss": "this is",
+        "thosere": "those are",
+        "tove": "to have",
+        "wasnt": "was not",
+        "wedve": "we would have",
+        "wellve": "we will have",
+        "werent": "were not",
+        "weve": "we have",
+        "whatd": "what did",
+        "whatll": "what will",
+        "whatre": "what are",
+        "whats": "what is",
+        "whatve": "what have",
+        "whens": "when is",
+        "whenve": "when have",
+        "whered": "where did",
+        "wherere": "where are",
+        "wheres": "where is",
+        "whereve": "where have",
+        "willve": "will have",
+        "whod": "who would",
+        "whodve": "who would have",
+        "wholl": "who will",
+        "whollve": "who will have",
+        "whos": "who is",
+        "whove": "who have",
+        "whyd": "why did",
+        "whyre": "why are",
+        "whyve": "why have",
+        "whys": "why is",
+        "wont": "will not",
+        "wontve": "will not have",
+        "wouldnt": "would not",
+        "wouldntve": "would not have",
+        "wouldve": "would have",
+        "yall": "you all",
+        "yalld": "you all would",
+        "yallre": "you all are",
+        "yallve": "you all have",
+        "youd": "you would",
+        "youdve": "you would have",
+        "youll": "you will",
+        "youllve": "you will have",
+        "youre": "you are",
+        "youve": "you have",
+        "yr": "your"
     }
 
 
@@ -452,7 +585,7 @@ def clean_text(text, stop_words):
     text = text.lower()
 
     # remove mentions
-    text = re.sub("(@[A-Za-z0-9]+)", "", text)
+    text = re.sub('(@[A-Za-z0-9]+)', '', text)
 
     # remove links
     text = re.sub(r'http\S+', '', text)
@@ -471,15 +604,15 @@ def clean_text(text, stop_words):
 
     # remove punctuation
     text = text.replace('...', ' ')  # special cases
-    text = text.replace('-', ' ')
+    text = text.replace('-', ' ')   # separate words with space
     text = text.translate(
         str.maketrans(
             '',
             '',
             '!"$%&*()+,./;<=>?@[\\]^_`{|}~'))
 
-    # tokenize words
-    tokenizer = RegexpTokenizer("(#?[a-zA-Z]+[0-9]*(?:'[a-zx]+)?)")
+    # tokenize words -- includes hashtags, words with numbers, and contractions
+    tokenizer = RegexpTokenizer("(#?[a-zA-Z]+[0-9]*(?:'[a-z]+)?)")
     words = tokenizer.tokenize(text)
 
     # convert contractions
@@ -489,11 +622,12 @@ def clean_text(text, stop_words):
                   if word in contractions else word for word in words]
     text = ' '.join(words_edit)
 
-    # remove stop words and lemmatize
+    # lemmatize, remove stop words, and remove words with fewer than two characters
     lemmatizer = WordNetLemmatizer()
     words = tokenizer.tokenize(text)
     words = [lemmatizer.lemmatize(word)
              for word in words if word not in stop_words]
+    words = [word for word in words if len(word) > 2]
     text = ' '.join(words)
 
     return text
