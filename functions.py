@@ -28,6 +28,7 @@ def twint_search(
         until=None,
         drop_cols=None,
         limit=None):
+    
     '''
     Function to scrape Twitter using Twint (`https://github.com/twintproject/twint`).
     Returns a Pandas DataFrame of tweets (in English) that contain search terms
@@ -97,10 +98,11 @@ def search_loop(
         username=None,
         drop_cols=None,
         limit=None):
-    '''
-    Function to loop over date range and perform twint_search function for 
-    each day, returning one combined dataframe.
     
+    '''
+    Function to loop over date range and perform twint_search function for
+    each day, returning one combined dataframe.
+
     Periodically saves progress to CSV after each daily search.
 
     Input
@@ -175,10 +177,11 @@ def search_loop(
     return df
 
 
-# emoticons
+# convert emoticons
 def load_dict_emoticons():
+    
     '''
-    Load a dictionary of emoticons as keys and their word equivalents 
+    Load a dictionary of emoticons as keys and their word equivalents
     as values.
 
     Source
@@ -246,10 +249,11 @@ def load_dict_emoticons():
     }
 
 
-# self defined contractions
+# convert contractions
 def load_dict_contractions():
+    
     '''
-    Load a dictionary of contractions as keys and their expanded words 
+    Load a dictionary of contractions as keys and their expanded words
     as values.
 
     Source (modified)
@@ -562,10 +566,11 @@ def load_dict_contractions():
 
 # apply text cleaning techniques
 def clean_text(text, stop_words):
+    
     '''
-    Function to make tweets lowercase, remove mentions, remove links, 
-    convert emoticons and emojis to words, remove punctuation (except 
-    apostrophes), tokenize words (including contractions), convert 
+    Function to make tweets lowercase, remove mentions, remove links,
+    convert emoticons and emojis to words, remove punctuation (except
+    apostrophes), tokenize words (including contractions), convert
     contractions to full words, and remove stop words.
 
     Input
@@ -622,7 +627,8 @@ def clean_text(text, stop_words):
                   if word in contractions else word for word in words]
     text = ' '.join(words_edit)
 
-    # lemmatize, remove stop words, and remove words with fewer than two characters
+    # lemmatize, remove stop words, and remove words with fewer than two
+    # characters
     lemmatizer = WordNetLemmatizer()
     words = tokenizer.tokenize(text)
     words = [lemmatizer.lemmatize(word)
@@ -633,7 +639,9 @@ def clean_text(text, stop_words):
     return text
 
 
+# topic identifier
 def lda_getter(x):
+    
     '''
     Function to find the LDA topic number with the highest weight.
 
@@ -657,7 +665,9 @@ def lda_getter(x):
     return topic
 
 
+# find POS tags
 def mask_pos_finder(text, word):
+    
     '''
     Function to find the part-of-speech (POS) tag for a target word.
 
@@ -684,11 +694,15 @@ def mask_pos_finder(text, word):
         if word in tag[0]:
             return tag[1]
 
+        
 # confusion matrix plotter
-def plot_confusion_matrix(cm, classes,
-                          normalize=False,
-                          title='Confusion matrix',
-                          cmap=plt.cm.Blues):
+def plot_confusion_matrix(
+        cm,
+        classes,
+        normalize=False,
+        title='Confusion matrix',
+        cmap=plt.cm.Blues):
+    
     '''
     This function prints and plots a model's confusion matrix.
 
@@ -717,7 +731,7 @@ def plot_confusion_matrix(cm, classes,
 
     [Code modified from work by Sean Abu Wilson.]
     '''
-    
+
     # convert to percentage, if normalize set to True
     if normalize:
         cm = cm.astype('float') / cm.sum(axis=1)[:, np.newaxis]
@@ -742,3 +756,86 @@ def plot_confusion_matrix(cm, classes,
     plt.ylabel('True label')
     plt.xlabel('Predicted label')
     plt.tight_layout()
+
+
+# decision tree feature importances plotter
+def plot_tree_features(
+        model,
+        df,
+        num_features=10,
+        to_print=True,
+        to_save=False,
+        file_name=None):
+    
+    '''
+    This function plots feature importances for Decision Tree models
+    and optionally prints a list of tuples with features and their
+    measure of importance.
+
+    Input
+    -----
+    model : Decision Tree model
+        `sklearn.tree.DecisionTreeClassifier()`
+    df : Pandas DataFrame
+        Features used in model.
+
+    Optional input
+    --------------
+    num_features : int
+        The number of features to plot/print (default=10).
+        All feature importances can be shown by setting
+        `num_features=X.shape[1]`.
+    to_print : bool
+        Whether to print list of feature names and their impurity
+        decrease values (default=True).
+        Printing can be turned off by setting `to_print=False`.
+    to_save : bool
+        Whether to save graph (default=False).
+        A file can be saved off by setting `to_save=True` and
+        setting a value for `file_name`.
+    file_name : str
+        Path and name to save a graph (default=None).
+        Required if `to_save=True`.
+
+    Output
+    ------
+    Prints a bar graph and optional list of tuples.
+    '''
+
+    features_dict = dict(zip(df.columns, model.feature_importances_))
+    sorted_d = sorted(
+        features_dict.items(),
+        key=lambda x: x[1],
+        reverse=True)[
+        :num_features]
+
+    # top 10 most important features
+    tree_importance = [x[1] for x in sorted_d]
+
+    # prettify the graph
+    plt.figure(figsize=(12, 8))
+    plt.title('Decision Tree Feature Importances', fontsize=25, pad=15)
+    plt.xlabel('')
+    plt.ylabel('Gini Importance', fontsize=22, labelpad=15)
+    plt.ylim(bottom=sorted_d[-1][1]/1.75, top=sorted_d[0][1]*1.05)
+    plt.xticks(rotation=60, fontsize=20)
+    plt.yticks(fontsize=20)
+
+    # plot
+    plt.bar([x[0] for x in sorted_d], tree_importance)
+
+    # prepare to display
+    plt.tight_layout()
+
+    if to_save:
+        # save plot
+        plt.savefig(file_name, bbox_inches='tight', transparent=True)
+
+    # show plot
+    plt.show()
+
+    if to_print:
+        # print a list of feature names and their impurity decrease value in
+        # the decision tree
+        print('\n\n\n')
+        print(sorted_d)
