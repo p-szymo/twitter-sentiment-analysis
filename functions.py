@@ -757,6 +757,42 @@ def plot_confusion_matrix(
     plt.xlabel('Predicted label')
     plt.tight_layout()
 
+    
+# naive bayes feature importances printer
+def print_nb_features(model, df, label_names, num_features=10):
+    
+    '''
+    This function prints feature importances for Bernoulli and
+    Multinomial Naive Bayes models, sorted by measure of importance.
+
+    Input
+    -----
+    model : Naive Bayes model
+        `sklearn.naive_bayes.BernoulliNB()`
+        `sklearn.naive_bayes.MultinomialNB()`
+    df : Pandas DataFrame
+        Features used in model.
+
+    Optional input
+    --------------
+    num_features : int
+        The number of features to print (default=10).
+        All feature importances can be shown by setting
+        `num_features=df.shape[1]`.
+
+    Output
+    ------
+    Prints labels and a list of features.
+    '''
+    
+    # loop through each label
+    for i,label in enumerate(label_names):
+        # sorted features per class by importance
+        prob_sorted = model.feature_log_prob_[i, :].argsort()
+
+        # printout class's features
+        print(f'{label.title()} tweets:\n{", ".join(list(np.take(df.columns, prob_sorted[:num_features])))}\n')
+              
 
 # decision tree feature importances plotter
 def plot_tree_features(
@@ -784,18 +820,14 @@ def plot_tree_features(
     num_features : int
         The number of features to plot/print (default=10).
         All feature importances can be shown by setting
-        `num_features=X.shape[1]`.
+        `num_features=df.shape[1]`.
     to_print : bool
         Whether to print list of feature names and their impurity
         decrease values (default=True).
         Printing can be turned off by setting `to_print=False`.
-    to_save : bool
-        Whether to save graph (default=False).
-        A file can be saved off by setting `to_save=True` and
-        setting a value for `file_name`.
     file_name : str
         Path and name to save a graph (default=None).
-        Required if `to_save=True`.
+        If `file_name=None`, the graph will not be saved.
 
     Output
     ------
@@ -827,7 +859,7 @@ def plot_tree_features(
     # prepare to display
     plt.tight_layout()
 
-    if to_save:
+    if file_name:
         # save plot
         plt.savefig(file_name, bbox_inches='tight', transparent=True)
 
