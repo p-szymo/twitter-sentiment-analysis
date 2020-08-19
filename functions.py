@@ -1,16 +1,22 @@
-# dataframe libraries
-from nltk.stem import WordNetLemmatizer
-import matplotlib.pyplot as plt
+# dataframe packages
+import numpy as np
+import pandas as pd
 import itertools
+
+# graphing packages
+import matplotlib.pyplot as plt
+
+# nlp packages
+import nltk
+from nltk.stem import WordNetLemmatizer
+from nltk.corpus import stopwords
+from nltk import RegexpTokenizer
+from textblob import TextBlob
+
+# string processing packages
 import emoji
 import string
 import re
-from textblob import TextBlob
-from nltk.corpus import stopwords
-from nltk import RegexpTokenizer
-import nltk
-import numpy as np
-import pandas as pd
 
 # twitter scraper
 import twint
