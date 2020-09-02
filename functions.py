@@ -28,17 +28,18 @@ nest_asyncio.apply()
 
 # twitter scrape
 def twint_search(
-        search,
-        username=None,
-        since=None,
-        until=None,
-        drop_cols=None,
-        limit=None):
-    
+    search,
+    username=None,
+    since=None,
+    until=None,
+    drop_cols=None,
+    limit=None
+):
     '''
     Function to scrape Twitter using Twint (`https://github.com/twintproject/twint`).
     Returns a Pandas DataFrame of tweets (in English) that contain search terms
     entered by the user.
+
 
     Input
     -----
@@ -46,27 +47,34 @@ def twint_search(
         Desired search term(s).
         Use of 'OR', 'AND', and other search commands is supported.
 
+
     Optional input
     --------------
     username : str
         Twitter handle.
         `@` symbol not required.
+
     since : str
         Start date of search.
         format ==> Y%%%-M%-D%, e.g. `2020-02-29`
+
     until : str
         End date of search (not inclusive).
         format ==> Y%%%-M%-D%, e.g. `2020-03-01`
+
     drop_cols : list (str)
         Tweet attributes to drop.
         For a full list of attributes, visit:
         `https://github.com/twintproject/twint/wiki/Tweet-attributes`
+
     limit : int
         Maximum number of tweets to scrape.
+
 
     Output
     ------
     df : Pandas DataFrame
+
     '''
 
     # instantiate twint object
@@ -97,50 +105,59 @@ def twint_search(
 
 # looping twitter scrape and creating dataframe
 def search_loop(
-        start_date,
-        end_date,
-        search,
-        filename,
-        username=None,
-        drop_cols=None,
-        limit=None):
-    
+    start_date,
+    end_date,
+    search,
+    filename,
+    username=None,
+    drop_cols=None,
+    limit=None
+):
     '''
     Function to loop over date range and perform twint_search function for
     each day, returning one combined dataframe.
 
     Periodically saves progress to CSV after each daily search.
 
+
     Input
     -----
     start_date : str
         Start date of search.
         format ==> Y%%%-M%-D%, e.g. `2020-02-29`
+
     end_date : str
         End date of search (not inclusive).
         format ==> Y%%%-M%-D%, e.g. `2020-03-01`
+
     search : str
         Desired search term(s).
         Use of 'OR', 'AND', and other search commands is supported.
+
     filename : str
         Path and name for saved csv file.
+
 
     Optional inputs
     ---------------
     username : str
         Twitter handle.
         `@` symbol not required.
+
     drop_cols : list (str)
         Tweet attributes to drop.
         For a full list of attributes, visit:
         `https://github.com/twintproject/twint/wiki/Tweet-attributes`
+
     limit : int
         Maximum number of tweets to scrape.
+
 
     Output
     ------
     df : Pandas DataFrame
         Also saves and updates a CSV file after each day in the search.
+
     '''
 
     # instantiate empty dataframe
@@ -185,10 +202,10 @@ def search_loop(
 
 # convert emoticons
 def load_dict_emoticons():
-    
     '''
     Load a dictionary of emoticons as keys and their word equivalents
     as values.
+
 
     Source
     ------
@@ -257,10 +274,10 @@ def load_dict_emoticons():
 
 # convert contractions
 def load_dict_contractions():
-    
     '''
     Load a dictionary of contractions as keys and their expanded words
     as values.
+
 
     Source (modified)
     ------
@@ -572,24 +589,27 @@ def load_dict_contractions():
 
 # apply text cleaning techniques
 def clean_text(text, stop_words):
-    
     '''
     Function to make tweets lowercase, remove mentions, remove links,
     convert emoticons and emojis to words, remove punctuation (except
     apostrophes), tokenize words (including contractions), convert
     contractions to full words, and remove stop words.
 
+
     Input
     -----
     text : str
         Text to be cleaned.
+
     stop_words : list (str)
         Words to remove from text.
+
 
     Output
     ------
     text : str
         Processed text.
+
     '''
 
     # make text lowercase
@@ -647,19 +667,21 @@ def clean_text(text, stop_words):
 
 # topic identifier
 def lda_getter(x):
-    
     '''
     Function to find the LDA topic number with the highest weight.
+
 
     Input
     -----
     x : list (tuple)
         LDA topic weights.
 
+
     Output
     ------
     topic : int
         LDA topic number.
+
     '''
 
     # convert to dictionary
@@ -673,21 +695,24 @@ def lda_getter(x):
 
 # find POS tags
 def mask_pos_finder(text, word):
-    
     '''
     Function to find the part-of-speech (POS) tag for a target word.
+
 
     Input
     -----
     text : str
         Text to be analyzed.
+
     word : str
         Target word in the text.
+
 
     Output
     ------
     tag[1] : str
         POS tag.
+
     '''
 
     # analyze text using TextBlob
@@ -700,35 +725,41 @@ def mask_pos_finder(text, word):
         if word in tag[0]:
             return tag[1]
 
-        
+
 # confusion matrix plotter
 def plot_confusion_matrix(
-        cm,
-        classes,
-        normalize=False,
-        title='Confusion matrix',
-        cmap=plt.cm.Blues):
-    
+    cm,
+    classes,
+    normalize=False,
+    title='Confusion matrix',
+    cmap=plt.cm.Blues
+):
     '''
     This function prints and plots a model's confusion matrix.
+
 
     Input
     -----
     cm : sklearn confusion matrix
         `sklearn.metrics.confusion_matrix(y_true, y_pred)`
+
     classes : list (str)
         Names of target classes.
+
 
     Optional input
     --------------
     normalize : bool
         Whether to apply normalization (default=False).
         Normalization can be applied by setting `normalize=True`.
+
     title : str
         Title of the returned plot.
+
     cmap : matplotlib color map
         For options, visit:
         `https://matplotlib.org/3.1.0/tutorials/colors/colormaps.html`
+
 
     Output
     ------
@@ -736,6 +767,7 @@ def plot_confusion_matrix(
 
 
     [Code modified from work by Sean Abu Wilson.]
+
     '''
 
     # convert to percentage, if normalize set to True
@@ -763,21 +795,23 @@ def plot_confusion_matrix(
     plt.xlabel('Predicted label')
     plt.tight_layout()
 
-    
+
 # naive bayes feature importances printer
 def print_nb_features(model, df, label_names, num_features=10):
-    
     '''
     This function prints feature importances for Bernoulli and
     Multinomial Naive Bayes models, sorted by measure of importance.
+
 
     Input
     -----
     model : Naive Bayes model
         `sklearn.naive_bayes.BernoulliNB()`
         `sklearn.naive_bayes.MultinomialNB()`
+
     df : Pandas DataFrame
         Features used in model.
+
 
     Optional input
     --------------
@@ -786,40 +820,46 @@ def print_nb_features(model, df, label_names, num_features=10):
         All feature importances can be shown by setting
         `num_features=df.shape[1]`.
 
+
     Output
     ------
     Prints labels and a list of features.
+
     '''
-    
+
     # loop through each label
-    for i,label in enumerate(label_names):
+    for i, label in enumerate(label_names):
         # sorted features per class by importance
         prob_sorted = model.feature_log_prob_[i, :].argsort()
 
         # printout class's features
-        print(f'{label.title()} tweets:\n{", ".join(list(np.take(df.columns, prob_sorted[:num_features])))}\n')
-              
+        print(
+            f'{label.title()} tweets:\n{", ".join(list(np.take(df.columns, prob_sorted[:num_features])))}\n')
+
 
 # decision tree feature importances plotter
 def plot_tree_features(
-        model,
-        df,
-        num_features=10,
-        to_print=True,
-        to_save=False,
-        file_name=None):
-    
+    model,
+    df,
+    num_features=10,
+    to_print=True,
+    to_save=False,
+    file_name=None
+):
     '''
     This function plots feature importances for Decision Tree models
     and optionally prints a list of tuples with features and their
     measure of importance.
 
+
     Input
     -----
     model : Decision Tree model
         `sklearn.tree.DecisionTreeClassifier()`
+
     df : Pandas DataFrame
         Features used in model.
+
 
     Optional input
     --------------
@@ -827,17 +867,21 @@ def plot_tree_features(
         The number of features to plot/print (default=10).
         All feature importances can be shown by setting
         `num_features=df.shape[1]`.
+
     to_print : bool
         Whether to print list of feature names and their impurity
         decrease values (default=True).
         Printing can be turned off by setting `to_print=False`.
+
     file_name : str
         Path and name to save a graph (default=None).
         If `file_name=None`, the graph will not be saved.
 
+
     Output
     ------
     Prints a bar graph and optional list of tuples.
+    
     '''
 
     features_dict = dict(zip(df.columns, model.feature_importances_))
@@ -855,7 +899,7 @@ def plot_tree_features(
     plt.title('Decision Tree Feature Importances', fontsize=25, pad=15)
     plt.xlabel('')
     plt.ylabel('Gini Importance', fontsize=22, labelpad=15)
-    plt.ylim(bottom=sorted_d[-1][1]/1.75, top=sorted_d[0][1]*1.05)
+    plt.ylim(bottom=sorted_d[-1][1] / 1.75, top=sorted_d[0][1] * 1.05)
     plt.xticks(rotation=60, fontsize=20)
     plt.yticks(fontsize=20)
 
