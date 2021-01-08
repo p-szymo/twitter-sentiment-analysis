@@ -139,7 +139,4 @@ dmypy.json
 /data
 
 # temp backups
-01_twitter_scraping_notebook-Copy1.ipynb
-02_data_cleaning_notebook-Copy1.ipynb
-03_nlp_features_eda_notebook-Copy1.ipynb
-04_modeling_notebook-Copy1.ipynb
+*-Copy1.ipynb
